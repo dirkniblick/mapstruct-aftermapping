@@ -1,6 +1,5 @@
 package com.example.mapstruct.entity;
 
-import com.example.mapstruct.entity.CommonEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +7,9 @@ import lombok.Setter;
 @Setter
 public class SpecificEntity implements CommonEntity {
 
-    Long id;
+    Long number;
 
     String name;
+
+    Boolean positive = false;
 }

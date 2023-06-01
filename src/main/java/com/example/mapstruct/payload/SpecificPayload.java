@@ -1,6 +1,5 @@
 package com.example.mapstruct.payload;
 
-import com.example.mapstruct.payload.CommonPayload;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class SpecificPayload implements CommonPayload {
 
-    Long id;
+    Long number;
 
     String name;
 }

@@ -2,7 +2,7 @@ package com.example.mapstruct.payload;
 
 public interface CommonPayload {
 
-    Long getId();
+    Long getNumber();
 
-    void setId(Long id);
+    void setNumber(Long number);
 }

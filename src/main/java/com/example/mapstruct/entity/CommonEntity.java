@@ -2,7 +2,9 @@ package com.example.mapstruct.entity;
 
 public interface CommonEntity {
 
-    Long getId();
+    Long getNumber();
 
-    void setId(Long id);
+    void setNumber(Long number);
+
+    void setPositive(Boolean isPositive);
 }
