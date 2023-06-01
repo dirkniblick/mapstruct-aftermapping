@@ -1,0 +1,65 @@
+plugins {
+    id "java"
+
+    id "io.freefair.lombok" version "8.0.1"
+    id "io.spring.dependency-management" version "1.1.0"
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
+    id "org.springframework.boot" version "2.7.11"
+}
+
+ext {
+    // Dependency versions
+    lombokVersion = "1.18.26"
+    mapStructVersion = "1.5.5.Final"
+    mapStructSpringExtensionsVersion = "1.0.1"
+    lombokMapStructVersion = "0.2.0"
+
+    set("snakeyaml.version","1.32") // Spring Boot 2.7 uses 1.30 which is vulnerable
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapStructVersion"
+    testAnnotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapStructVersion"
+
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+
+    implementation "org.mapstruct.extensions.spring:mapstruct-spring-annotations:$mapStructSpringExtensionsVersion"
+    annotationProcessor "org.mapstruct.extensions.spring:mapstruct-spring-annotations:$mapStructSpringExtensionsVersion"
+    testAnnotationProcessor "org.mapstruct.extensions.spring:mapstruct-spring-annotations:$mapStructSpringExtensionsVersion"
+}
+
+lombok {
+    version = lombokVersion
+    disableConfig = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+//    options.compilerArgs += [
+//            "-Xlint:unchecked",
+//            "-parameters"
+//    ]
+//    options.forkOptions.jvmArgs += [
+//            "--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" //needed for Lombok in JDK 17
+//    ]
+}
+
